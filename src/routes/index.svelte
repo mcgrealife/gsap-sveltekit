@@ -119,7 +119,7 @@
       start: "top center",
        
         // markers: true,
-        toggleActions: "play play reverse pause",
+        toggleActions: "play play play play",
   }
   });
 
@@ -201,7 +201,7 @@
   <lottie-player
     src="source.json"
     background="transparent"
-    speed="0.5"
+    speed="1"
     style="width: {desktop ? '492px' : '300px'}; height: {desktop
       ? '492px'
       : '342px'}; overflow-y: hidden"
