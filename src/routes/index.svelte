@@ -3,14 +3,16 @@
 </script>
 
 <script>
-  // use https://github.com/chrisgannon/ScrollLottie
   import Spacer from "../components/Spacer.svelte";
   import { onMount } from "svelte";
   import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollTrigger } from "gsap/dist/ScrollTrigger.js";
+  import { TextPlugin } from "gsap/dist/TextPlugin.js";
   import { create } from "@lottiefiles/lottie-interactivity";
+  import lottie from "lottie-web";
 
   gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(TextPlugin);
 
   let innerWindowWidth;
   let y;
@@ -32,9 +34,7 @@
     alert("SUP");
   };
 
-
   onMount(() => {
-
     gsap.to(".card", {
       scrollTrigger: {
         trigger: ".card",
@@ -46,6 +46,52 @@
       duration: 0.4,
       ease: "none",
       x: "+=200",
+    });
+
+    // gsap lottie helper function
+    // https://greensock.com/docs/v3/HelperFunctions#lottie
+    function LottieScrollTrigger(vars) {
+      let playhead = { frame: 0 },
+        target = gsap.utils.toArray(vars.target)[0],
+        speeds = { slow: "+=2000", medium: "+=1000", fast: "+=500" },
+        st = {
+          trigger: target,
+          pin: true,
+          start: "top top",
+          end: speeds[vars.speed] || "+=1000",
+          scrub: 1,
+        },
+        animation = lottie.loadAnimation({
+          container: target,
+          renderer: vars.renderer || "svg",
+          loop: false,
+          autoplay: false,
+          path: vars.path,
+        });
+      for (let p in vars) {
+        // let users override the ScrollTrigger defaults
+        st[p] = vars[p];
+      }
+      animation.addEventListener("DOMLoaded", function () {
+        gsap.to(playhead, {
+          frame: animation.totalFrames - 1,
+          ease: "none",
+          onUpdate: () => animation.goToAndStop(playhead.frame, true),
+          scrollTrigger: st,
+        });
+        // in case there are any other ScrollTriggers on the page and the loading of this Lottie asset caused layout changes
+        ScrollTrigger.sort();
+        ScrollTrigger.refresh();
+      });
+      return animation;
+    }
+
+    LottieScrollTrigger({
+      target: "#mainLottie",
+      path: "source.json",
+      speed: "medium",
+      scrub: 1, // seconds it takes for the playhead to "catch up"
+      // you can also add ANY ScrollTrigger values here too, like trigger, start, end, onEnter, onLeave, onUpdate, etc. See https://greensock.com/docs/v3/Plugins/ScrollTrigger
     });
 
     myRef.addEventListener("load", function () {
@@ -61,12 +107,36 @@
         ],
       });
     });
+
+    gsap.to("#textplugin", {
+    duration: 3,
+    // delay: 1,
+    text: "Resider solely consists of rental properties syndicated through data API’s. With up to date and accurate listings, your clients can browse with confidence.",
+    ease: "none", //Power1.easeOut
+    
+    scrollTrigger: {
+      trigger: "#textplugin",
+      start: "top center",
+       
+        // markers: true,
+        toggleActions: "play play reverse pause",
+  }
   });
+
+
+  });
+
+
+
 </script>
 
 <svelte:head>
   <script
     src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/ScrollTrigger.min.js"></script>
 </svelte:head>
 
 <svelte:window bind:innerWidth={innerWindowWidth} bind:scrollY={y} />
@@ -103,33 +173,48 @@
   </h1>
 
   <Spacer m="16" d="16" />
-
+  
   <div class={desktop ? "typeDesktop" : "typeMobile"}>
-    <p class:p-desktop={desktop}>
-      Resider is a smart, efficient and helpful way to qualify and schedule your prosepective tenants.
+    <p  class:p-desktop={desktop}>
+      Resider is a smart, efficient and helpful way to qualify and schedule your
+      prosepective tenants.
     </p>
   </div>
   <div />
 
   <Spacer m="45" d="24" />
 
-  
-    <lottie-player
-      src="source.json"
-      background="transparent"
-      speed="0.5"
-      style="width: {desktop ? '492px' : '300px'}; height: {desktop
-        ? '492px'
-        : '342px'}; overflow-y: hidden"
-      autoplay
-    />
+
+  <!-- testing  textplugin
+  <h1 id="textplugin">sdf</h1> -->
+
+  <!-- 
+    to use with gsap scrollTrigger's helper function:
+    - instead of creating a <lottie-player />
+    - just add a div with #id, and reference it in the LottieScrollTrigger onMount
+    <div id="mainLottie"></div> 
+    - The lottie-player is build on top of lottie-web. LottieScrollTrigger function works directly with lottie-web. So lottie-player is not needed (it just makes the typical lottie non-scroll animations easier to add). 
+    - alternatively, lottie-interactivity does work with the player
+    - Each lottie in this file is actually using a different technique!
+  -->
+
+  <lottie-player
+    src="source.json"
+    background="transparent"
+    speed="0.5"
+    style="width: {desktop ? '492px' : '300px'}; height: {desktop
+      ? '492px'
+      : '342px'}; overflow-y: hidden"
+    autoplay
+  />
+
   
 
   <Spacer m="82" d="82" />
   <div class="section2">
     <h2>Platform <span style="color: #366CA5">integrity</span></h2>
-      <div class="typeText2">
-        <p class="p2">  {typeText.substring(0, y / 5)}</p>
+    <div class="typeText2">
+      <p id="textplugin" class="p2"></p>
     </div>
     <Spacer m="46" d="46" />
     <div class="cards">
