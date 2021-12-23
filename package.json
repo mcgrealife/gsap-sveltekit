@@ -14,6 +14,9 @@
   },
   "type": "module",
   "dependencies": {
+    "@lottiefiles/lottie-interactivity": "^1.3.0",
+    "@lottiefiles/svelte-lottie-player": "^0.2.0",
+    "fractils": "^1.0.15",
     "gsap": "^3.9.0"
   }
 }
