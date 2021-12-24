@@ -43,7 +43,38 @@
         markers: true,
       },
     });
+  
+
+  gsap.to(".nav", {
+      ease: "none",
+      y: "+=100",
+      scrollTrigger: {
+        trigger: ".spacer4",
+        // start: "top center",
+        scrub: 1,
+        markers: true,
+      },
+    });
+
+    gsap.to(".small-header", {
+      ease: "none",
+      opacity: "+=100",
+      scrollTrigger: {
+        trigger: ".spacer4",
+        // toggleActions: "play reverse",
+        // start: "top center",
+        // end: "something"
+        scrub: 2,
+        markers: true,
+      },
+    });
+
+
   });
+
+  function handleClick() {
+    window.location.href = "/";
+  }
 </script>
 
 
@@ -62,6 +93,8 @@
         alt="property-tall"
       />
       <img class="swiper fillColWidth overlay" src="swiper.png" alt="swiper" />
+      <img class="nav fillColWidth overlay" src="phone-screens/property-nav-no-shadow.png" alt="nav-bar">
+      <img class="small-header fillColWidth overlay" src="small-header.png" alt="small-header">
       <img
         class="status-bar fillColWidth overlay"
         src="status-bar.png"
@@ -77,6 +110,8 @@
   </div>
   <div class="spacer3" >spacer3</div>
   <div class="spacer4" >spacer4</div>
+  <!-- <button class="btn" on:click|preventDefault="{handleClick}">Go back to main page</button> -->
+
 </div>
 
 
@@ -98,6 +133,7 @@
 
   .scroll {
     height: 300vh;
+
   }
 
   .spacer1 {
@@ -127,7 +163,7 @@
     grid-area: 2/3/3/4;
     display: grid;
     grid-template-columns: 10.5px 209px 10.5px;
-    grid-template-rows: 10px 24.5px 1fr 8px 10px;
+    grid-template-rows: 10px 24.5px 420px 8px 10px;
     /* center row 420px */
     grid-column-gap: 0px;
     grid-row-gap: 0px;
@@ -149,6 +185,19 @@
     grid-area: 4/2/5/3;
   }
 
+  .nav {
+    grid-area: 3/2/5/3;
+    align-self: end;
+    z-index: 2;
+  }
+
+  .small-header {
+    grid-area: 3/2/4/3;
+    align-self: start;
+    opacity: 0;
+    z-index: 2;
+  }
+
   .fillColWidth {
     max-width: 100%;
     height: auto;
@@ -164,6 +213,14 @@
   .mask {
     grid-area: 1/3/1/4;
     /* z-index: 2; */
+  }
+
+  .btn {
+      display: grid;
+      height: 100px;
+      width: 50%;
+      justify-content: center;
+
   }
 
   @font-face {

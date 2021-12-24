@@ -32,7 +32,7 @@
     "Resider solely consists of rental properties syndicated through data API’s. With up to date and accurate listings, your clients can browse with confidence";
 
   const handleClick = () => {
-    alert("SUP");
+    window.location.href = "/v2";
   };
 
   onMount(() => {
