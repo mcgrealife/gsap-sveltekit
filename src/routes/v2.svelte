@@ -56,19 +56,20 @@
       },
     });
 
+
+    // try to make small-header reverse at the slightest scroll oppositie direction
     gsap.to(".small-header", {
       ease: "none",
       opacity: "+=100",
       scrollTrigger: {
         trigger: ".spacer4",
-        // toggleActions: "play reverse",
+        // toggleActions: "play play reverse reverse",
         // start: "top center",
-        // end: "something"
+        end: "10px",
         scrub: 2,
         markers: true,
       },
     });
-
 
   });
 
@@ -149,7 +150,7 @@
   }
 
   .spacer3 {
-    height: 800px;
+    height: 500px;
     background-color: green;
   }
 
