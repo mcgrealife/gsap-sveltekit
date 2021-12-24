@@ -10,12 +10,13 @@
   import { TextPlugin } from "gsap/dist/TextPlugin.js";
   import { create } from "@lottiefiles/lottie-interactivity";
   import lottie from "lottie-web";
+  
+  // document.body.classList.add('main')
 
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(TextPlugin);
 
   let innerWindowWidth;
-  
 
   let myRef;
 
@@ -109,25 +110,20 @@
     });
 
     gsap.to("#textplugin", {
-    duration: 3,
-    // delay: 1,
-    text: "Resider solely consists of rental properties syndicated through data API’s. With up to date and accurate listings, your clients can browse with confidence.",
-    ease: "none", //Power1.easeOut
-    
-    scrollTrigger: {
-      trigger: "#textplugin",
-      start: "top center",
-       
+      duration: 3,
+      // delay: 1,
+      text: "Resider solely consists of rental properties syndicated through data API’s. With up to date and accurate listings, your clients can browse with confidence.",
+      ease: "none", //Power1.easeOut
+
+      scrollTrigger: {
+        trigger: "#textplugin",
+        start: "top center",
+
         // markers: true,
         toggleActions: "play play play play",
-  }
+      },
+    });
   });
-
-
-  });
-
-
-
 </script>
 
 <svelte:head>
@@ -139,56 +135,56 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/ScrollTrigger.min.js"></script>
 </svelte:head>
 
-<svelte:window bind:innerWidth={innerWindowWidth}  />
+<svelte:window bind:innerWidth={innerWindowWidth} />
 
-{#if desktop}
-  <div class="desktop-header">
+
+  {#if desktop}
+    <div class="desktop-header">
+      <img
+        style="margin: 12px 0px 10px 24px"
+        src="logo-rectangle.png"
+        alt="logo-rect"
+        width="101"
+        height="50"
+      />
+      <button class="btn-primary" on:click={handleClick}>Schedule Demo</button>
+    </div>
+  {:else}
     <img
-      style="margin: 12px 0px 10px 24px"
+      style="margin-left: 28px; margin-top: 24px;"
       src="logo-rectangle.png"
       alt="logo-rect"
-      width="101"
-      height="50"
+      width="114"
+      height="57"
     />
-    <button class="btn-primary" on:click={handleClick}>Schedule Demo</button>
-  </div>
-{:else}
-  <img
-    style="margin-left: 28px; margin-top: 24px;"
-    src="logo-rectangle.png"
-    alt="logo-rect"
-    width="114"
-    height="57"
-  />
-{/if}
+  {/if}
 
-<Spacer m="36" d="48" />
+  <Spacer m="36" d="48" />
 
-<div class="container">
-  <img src="logo-square-1.png" width={desktop ? 56 : 40} alt="logo-square" />
-  <Spacer m="28" d="28" />
+  <div class="container">
+    <img src="logo-square-1.png" width={desktop ? 56 : 40} alt="logo-square" />
+    <Spacer m="28" d="28" />
 
-  <h1 class:h1-desktop={desktop}>
-    A <span style="color: {color.primaryBlue}">better </span> way to generate leads
-  </h1>
+    <h1 class:h1-desktop={desktop}>
+      A <span style="color: {color.primaryBlue}">better </span> way to generate leads
+    </h1>
 
-  <Spacer m="16" d="16" />
-  
-  <div class={desktop ? "typeDesktop" : "typeMobile"}>
-    <p  class:p-desktop={desktop}>
-      Resider is a smart, efficient and helpful way to qualify and schedule your
-      prosepective tenants.
-    </p>
-  </div>
-  <div />
+    <Spacer m="16" d="16" />
 
-  <Spacer m="45" d="24" />
+    <div class={desktop ? "typeDesktop" : "typeMobile"}>
+      <p class:p-desktop={desktop}>
+        Resider is a smart, efficient and helpful way to qualify and schedule
+        your prosepective tenants.
+      </p>
+    </div>
+    <div />
 
+    <Spacer m="45" d="24" />
 
-  <!-- testing  textplugin
+    <!-- testing  textplugin
   <h1 id="textplugin">sdf</h1> -->
 
-  <!-- 
+    <!-- 
     to use with gsap scrollTrigger's helper function:
     - instead of creating a <lottie-player />
     - just add a div with #id, and reference it in the LottieScrollTrigger onMount
@@ -198,55 +194,54 @@
     - Each lottie in this file is actually using a different technique!
   -->
 
-  <lottie-player
-    src="source.json"
-    background="transparent"
-    speed="1"
-    style="width: {desktop ? '492px' : '300px'}; height: {desktop
-      ? '492px'
-      : '342px'}; overflow-y: hidden"
-    autoplay
-  />
+    <lottie-player
+      src="source.json"
+      background="transparent"
+      speed="1"
+      style="width: {desktop ? '492px' : '300px'}; height: {desktop
+        ? '492px'
+        : '342px'}; overflow-y: hidden"
+      autoplay
+    />
 
-  
-
-  <Spacer m="82" d="82" />
-  <div class="section2">
-    <h2>Platform <span style="color: #366CA5">integrity</span></h2>
-    <div class="typeText2">
-      <p id="textplugin" class="p2"></p>
+    <Spacer m="82" d="82" />
+    <div class="section2">
+      <h2>Platform <span style="color: #366CA5">integrity</span></h2>
+      <div class="typeText2">
+        <p id="textplugin" class="p2" />
+      </div>
+      <Spacer m="46" d="46" />
+      <div class="cards">
+        <img class="card" src="cards-3.png" height="134.25" alt="card" />
+      </div>
     </div>
+
+    <div class="gs">
+      <div class="square" />
+    </div>
+
+    <Spacer m="82" d="82" />
+
+    <h2><span style="color: #366CA5">Move in date</span> filter</h2>
+    <p class="p2">
+      Qualified leads are our emphasis. Allowing users to narrow down exact
+      availability by their move in date is the first step.
+    </p>
+    <br />
+
     <Spacer m="46" d="46" />
-    <div class="cards">
-      <img class="card" src="cards-3.png" height="134.25" alt="card" />
-    </div>
+    <!-- <img src="image-move-date.png" width="382" alt="card" /> -->
+
+    <lottie-player
+      bind:this={myRef}
+      id="firstLottie"
+      class="firstLottie"
+      src="calendar-2.json"
+    />
+
+    <Spacer m="500" d="500" />
   </div>
 
-  <div class="gs">
-    <div class="square" />
-  </div>
-
-  <Spacer m="82" d="82" />
-
-  <h2><span style="color: #366CA5">Move in date</span> filter</h2>
-  <p class="p2">
-    Qualified leads are our emphasis. Allowing users to narrow down exact
-    availability by their move in date is the first step.
-  </p>
-  <br />
-
-  <Spacer m="46" d="46" />
-  <!-- <img src="image-move-date.png" width="382" alt="card" /> -->
-
-  <lottie-player
-    bind:this={myRef}
-    id="firstLottie"
-    class="firstLottie"
-    src="calendar-2.json"
-  />
-
-  <Spacer m="500" d="500" />
-</div>
 
 <style>
   * {
@@ -255,6 +250,7 @@
     padding: 0;
     margin: 0;
   }
+
 
   .cards {
     display: grid;
