@@ -15,7 +15,7 @@
   gsap.registerPlugin(TextPlugin);
 
   let innerWindowWidth;
-  let y;
+  
 
   let myRef;
 
@@ -139,7 +139,7 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/ScrollTrigger.min.js"></script>
 </svelte:head>
 
-<svelte:window bind:innerWidth={innerWindowWidth} bind:scrollY={y} />
+<svelte:window bind:innerWidth={innerWindowWidth}  />
 
 {#if desktop}
   <div class="desktop-header">
