@@ -94,18 +94,23 @@
         alt="property-tall"
       />
       <img class="swiper fillColWidth overlay" src="swiper.png" alt="swiper" />
+
       <img class="nav fillColWidth overlay" src="phone-screens/property-nav-no-shadow.png" alt="nav-bar">
+
       <img class="small-header fillColWidth overlay" src="small-header.png" alt="small-header">
+
       <img
         class="status-bar fillColWidth overlay"
         src="status-bar.png"
         alt="status-bar"
       />
+
       <img
         class="fitColWidth overlay"
         src="iPhone-Frame.svg"
         alt="iPhone-frame"
       />
+      
     </div>
     <div class="spacer2" />
   </div>
@@ -126,8 +131,19 @@
     position: sticky;
     top: 0px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr) 230px repeat(2, 1fr);
-    grid-template-rows: 1fr 472px 1fr;
+    grid-template-columns: repeat(2, 1fr) 398px repeat(2, 1fr);
+    grid-template-rows: 1fr 818.5pxpx 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+
+  .phone-container {
+    overflow-y: hidden;
+    grid-area: 2/3/3/4;
+    display: grid;
+    grid-template-columns: 1fr 362px 1fr;
+    grid-template-rows: 18px 43px 740px 8px 10px;
+    /* center row 420px */
     grid-column-gap: 0px;
     grid-row-gap: 0px;
   }
@@ -159,16 +175,7 @@
     background-color: green;
   }
 
-  .phone-container {
-    overflow-y: hidden;
-    grid-area: 2/3/3/4;
-    display: grid;
-    grid-template-columns: 10.5px 209px 10.5px;
-    grid-template-rows: 10px 24.5px 420px 8px 10px;
-    /* center row 420px */
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-  }
+
 
   .overlay {
     z-index: 3;
@@ -205,9 +212,9 @@
   }
 
   .fitColWidth {
-    /* object-fit: cover; */
-    /* height: auto; */
-    /* width: 100%; */
+    object-fit: cover;
+    height: auto;
+    width: 100%;
     grid-area: 1/1/3/5;
   }
 

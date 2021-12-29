@@ -8,3 +8,7 @@
 - wow gsap is excellent. I'm using scrollTrigger and TextPlugin (together). I have since linked it to lottie JSON animations (made in After Effects).
 - note to self: use .lottie files instead of .json files to utilize the VScode lottie extension (which allows easy manipulation of frame rate and colors)
 - this app also displays 3 different ways to add a lottie animation. (gsap works best without the lottie-player, and just the basic lottie-web import).
+
+## CSS grid experiments
+
+- now hidden in route /v2 (or click blue button top right) 
