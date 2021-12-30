@@ -20,21 +20,24 @@
 
   onMount(() => {
 
+    const runOnComplete = () => {
+      gsap.to(".property", {
+      ease: "none",
+      y: "+=450",
+      // scrollTrigger: {
+      //   // trigger: ".spacer4",
+      //   // start: "top center",
+      //   scrub: 0,
+      //   // markers: true ,
+      // },
+    });
+    }
+
+    
     gsap.to(".property", {
       ease: "none",
       y: "-=1800",
-      scrollTrigger: {
-        // trigger: ".spacer4",
-        // start: "top center",
-        scrub: 0,
-        // markers: true,
-      },
-    });
-  
-
-  gsap.to(".nav", {
-      ease: "none",
-      y: "+=100",
+      onComplete: runOnComplete,
       scrollTrigger: {
         // trigger: ".spacer4",
         // start: "top center",
@@ -44,16 +47,30 @@
     });
 
 
+
+  // gsap.to(".nav", {
+  //     ease: "none",
+  //     y: "+=100",
+  //     scrollTrigger: {
+  //       // trigger: ".spacer4",
+  //       // start: "top center",
+  //       scrub: 1,
+  //       // markers: true,
+  //     },
+  //   });
+
+
     // try to make small-header reverse at the slightest scroll oppositie direction
     gsap.to(".small-header", {
       ease: "none",
       opacity: "+=100",
+      duration: 0.1,
       scrollTrigger: {
         trigger: ".property",
         // toggleActions: "play play reverse reverse",
-        start: "middle -300px",
+        start: "middle -100px",
         // end: "10px",
-        scrub: 2,
+        scrub: 0,
         markers: true,
       },
     });
@@ -173,6 +190,7 @@
     opacity: 0;
     z-index: 2;
     will-change: transform;
+    box-shadow: 0px 4px 4px -2px rgba(60, 64, 67, 0.12);
   }
 
   .fillColWidth {
