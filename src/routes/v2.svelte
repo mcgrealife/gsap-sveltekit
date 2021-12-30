@@ -11,36 +11,23 @@
 
 
 <script>
-  import Spacer from "../components/Spacer.svelte";
   import { onMount } from "svelte";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/dist/ScrollTrigger.js";
-  import { TextPlugin } from "gsap/dist/TextPlugin.js";
-  import lottie from "lottie-web";
-
-  let innerWindowWidth;
-  $: desktop = innerWindowWidth >= 900;
 
   gsap.registerPlugin(ScrollTrigger);
-  gsap.registerPlugin(TextPlugin);
+  
 
   onMount(() => {
-    // gsap.from(".phone-outline", {
-    //   duration: 0.8,
-    //   ease: "easeOut",
-    //   //   height: "+=200",
-    //   width: "+=1500",
-    //   opacity: 0,
-    // });
 
     gsap.to(".property", {
       ease: "none",
-      y: "-=1100",
+      y: "-=1800",
       scrollTrigger: {
-        trigger: ".spacer4",
+        // trigger: ".spacer4",
         // start: "top center",
         scrub: 0,
-        markers: true,
+        // markers: true,
       },
     });
   
@@ -49,10 +36,10 @@
       ease: "none",
       y: "+=100",
       scrollTrigger: {
-        trigger: ".spacer4",
+        // trigger: ".spacer4",
         // start: "top center",
         scrub: 1,
-        markers: true,
+        // markers: true,
       },
     });
 
@@ -62,31 +49,29 @@
       ease: "none",
       opacity: "+=100",
       scrollTrigger: {
-        trigger: ".spacer4",
+        trigger: ".property",
         // toggleActions: "play play reverse reverse",
-        // start: "top center",
-        end: "10px",
+        start: "middle -300px",
+        // end: "10px",
         scrub: 2,
         markers: true,
       },
     });
 
+
+
+
+
   });
 
-  function handleClick() {
-    window.location.href = "/";
-  }
 </script>
 
 
-<svelte:window bind:innerWidth={innerWindowWidth} />
 
 <div class="scroll">
-  <div class="gridContainer" style="background-color: blue">
-    <div class="spacer1" />
-    <!-- <img class="fitColWidth mask" src="mask-phone-only.svg" alt="mask" /> -->
-    <div class="phone-container" style="background-color: red">
-      <!-- <img class="phone-content fillColWidth" src="phone-screens/v2.png" alt="home"/> -->
+  <div class="gridContainer">
+
+    <div class="phone-container">
       <img
         class="phone-content fillColWidth property"
         id="property"
@@ -111,12 +96,12 @@
         alt="iPhone-frame"
       />
       
+      
+
     </div>
-    <div class="spacer2" />
+    
   </div>
-  <div class="spacer3" >spacer3</div>
-  <div class="spacer4" >spacer4</div>
-  <!-- <button class="btn" on:click|preventDefault="{handleClick}">Go back to main page</button> -->
+ 
 
 </div>
 
@@ -132,9 +117,11 @@
     top: 0px;
     display: grid;
     grid-template-columns: repeat(2, 1fr) 398px repeat(2, 1fr);
-    grid-template-rows: 1fr 818.5pxpx 1fr;
+    grid-template-rows: 1fr 818.5px 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    height: 100vh;
+    
   }
 
   .phone-container {
@@ -146,33 +133,12 @@
     /* center row 420px */
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    overscroll-behavior-y: none;  
   }
 
   .scroll {
     height: 300vh;
-
-  }
-
-  .spacer1 {
-    height: 100px;
-    background-color: red;
-    grid-area: 1/1/1/6;
-  }
-
-  .spacer2 {
-    height: 100px;
-    background-color: yellow;
-    grid-area: 3/1/3/6;
-  }
-
-  .spacer3 {
-    height: 500px;
-    background-color: green;
-  }
-
-  .spacer4 {
-    height: 100px;
-    background-color: green;
+    overscroll-behavior-y: none;  
   }
 
 
@@ -183,6 +149,7 @@
 
   .phone-content {
     grid-area: 3/2/3/3;
+    will-change: transform;
   }
 
   .status-bar {
@@ -197,6 +164,7 @@
     grid-area: 3/2/5/3;
     align-self: end;
     z-index: 2;
+    will-change: transform;
   }
 
   .small-header {
@@ -204,6 +172,7 @@
     align-self: start;
     opacity: 0;
     z-index: 2;
+    will-change: transform;
   }
 
   .fillColWidth {
@@ -218,18 +187,6 @@
     grid-area: 1/1/3/5;
   }
 
-  .mask {
-    grid-area: 1/3/1/4;
-    /* z-index: 2; */
-  }
-
-  .btn {
-      display: grid;
-      height: 100px;
-      width: 50%;
-      justify-content: center;
-
-  }
 
   @font-face {
     font-family: "Gilroy";
