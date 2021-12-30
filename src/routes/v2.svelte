@@ -20,44 +20,43 @@
 
   onMount(() => {
 
-    const runOnComplete = () => {
-      gsap.to(".property", {
-      ease: "none",
-      y: "+=450",
-      // scrollTrigger: {
-      //   // trigger: ".spacer4",
-      //   // start: "top center",
-      //   scrub: 0,
-      //   // markers: true ,
-      // },
-    });
-    }
 
+
+    // const runOnComplete = () => {
+    //   gsap.to(".availability", {
+    //   ease: "none",
+    //   opacity: 100,
+          
+    // });
+    // }
+
+   
     
     gsap.to(".property", {
       ease: "none",
-      y: "-=1800",
-      onComplete: runOnComplete,
+      y: "-=1875",
+      // onComplete: runOnComplete,
       scrollTrigger: {
-        // trigger: ".spacer4",
-        // start: "top center",
+        // trigger: ".scroll",
+        // start: "middle top", 
+        pin: "#gridContainer",
         scrub: 1,
         // markers: true,
       },
     });
 
-
-
-  // gsap.to(".nav", {
-  //     ease: "none",
-  //     y: "+=100",
-  //     scrollTrigger: {
-  //       // trigger: ".spacer4",
-  //       // start: "top center",
-  //       scrub: 1,
-  //       // markers: true,
-  //     },
-  //   });
+    gsap.to(".availability", {
+      ease: "none",
+      left: "-=362",
+      scrollTrigger: {
+        trigger: ".property",
+        start: "2000px center",
+        markers: true,
+        
+        
+        toggleActions: "play reverse play reverse"
+      },
+    });
 
 
     // try to make small-header reverse at the slightest scroll oppositie direction
@@ -71,12 +70,22 @@
         start: "middle -100px",
         // end: "10px",
         scrub: 0,
-        markers: true,
+        // markers: true,
       },
     });
 
 
-
+    gsap.to(".text", {
+      ease: "none",
+      left: "+=450",
+      // onComplete: runOnComplete,
+      scrollTrigger: {
+        trigger: ".test-text",
+        // start: "middle top",
+        scrub: 1,
+        // markers: true,
+      },
+    });
 
 
   });
@@ -86,18 +95,27 @@
 
 
 <div class="scroll">
-  <div class="gridContainer">
+  <div class="section2"></div>
+  <div id="gridContainer"  class="gridContainer">
+
+    <div id= "text" class="text">A better way to generate leads</div>
+
+    
 
     <div class="phone-container">
+      
       <img
-        class="phone-content fillColWidth property"
+        class="fillColWidth property"
         id="property"
         src="phone-screens/property-tall.png"
         alt="property-tall"
       />
-      <img class="swiper fillColWidth overlay" src="swiper.png" alt="swiper" />
+      <img class="swiper fillColWidth overlay10" src="swiper.svg" alt="swiper" />
 
-      <img class="nav fillColWidth overlay" src="phone-screens/property-nav-no-shadow.png" alt="nav-bar">
+      <img class="fillColWidth availability overlay4" src="availability.png" alt="availability" >
+
+
+      <img class="nav fillColWidth overlay5" src="nav.png" alt="nav">
 
       <img class="small-header fillColWidth overlay" src="small-header.png" alt="small-header">
 
@@ -108,17 +126,26 @@
       />
 
       <img
-        class="fitColWidth overlay"
+        class="fitColWidth overlay10"
         src="iPhone-Frame.svg"
         alt="iPhone-frame"
       />
+
+           
       
       
 
     </div>
     
   </div>
+
+  <div class="section2"></div>
  
+  
+  <div class="test-text">
+    <h1>test</h1>
+  </div>
+  
 
 </div>
 
@@ -129,8 +156,8 @@
   }
 
   .gridContainer {
-    position: -webkit-sticky;
-    position: sticky;
+    /* position: -webkit-sticky;
+    position: sticky; */
     top: 0px;
     display: grid;
     grid-template-columns: repeat(2, 1fr) 398px repeat(2, 1fr);
@@ -142,29 +169,50 @@
   }
 
   .phone-container {
-    overflow-y: hidden;
-    grid-area: 2/3/3/4;
-    display: grid;
-    grid-template-columns: 1fr 362px 1fr;
-    grid-template-rows: 18px 43px 740px 8px 10px;
-    /* center row 420px */
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    overscroll-behavior-y: none;  
+  overflow-y: hidden;
+      grid-area: 2/3/3/4;
+      display: grid;
+      grid-template-columns: 1fr 362px 1fr;
+      grid-template-rows: 18px 43px 740px 18px;
+      /* center row 420px */
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+      overscroll-behavior-y: none;  
   }
 
   .scroll {
-    height: 300vh;
+    height: 500vh;
     overscroll-behavior-y: none;  
   }
 
+  .section2 {
+    height: 1080px;
+    background-color:#366CA5;
+  }
+
+.text {
+  grid-area: 2/3/3/4;
+  align-self: center;
+  justify-self: center;
+  position: relative;
+  font-size: 72px;
+}
+
+
+  
+  .availability {
+    grid-area: 3/3/3/4;
+    position: relative;
+    
+    
+  }
 
 
   .overlay {
     z-index: 3;
   }
 
-  .phone-content {
+  .property {
     grid-area: 3/2/3/3;
     will-change: transform;
   }
@@ -174,14 +222,19 @@
   }
 
   .swiper {
-    grid-area: 4/2/5/3;
+    grid-area: 3/2/4/3;
+      align-self: end;
+      object-fit: cover;
+      height: auto;
+      width: 100%;
   }
 
   .nav {
-    grid-area: 3/2/5/3;
+    grid-area: 3/2/4/3;
     align-self: end;
     z-index: 2;
     will-change: transform;
+    box-shadow: 0px -2.00133px 4.00267px rgba(60, 64, 67, 0.1);
   }
 
   .small-header {
@@ -204,6 +257,38 @@
     width: 100%;
     grid-area: 1/1/3/5;
   }
+
+
+  .overlay1 {
+        z-index: 1;
+    }
+
+    .overlay2 {
+        z-index: 2;
+    }
+  
+    .overlay3 {
+      z-index: 3;
+    }
+
+  
+    .overlay3 {
+        z-index: 3;
+    }
+
+    .overlay4 {
+        z-index: 4;
+    }
+
+    .overlay5 {
+        z-index: 5;
+    }
+
+   
+
+    .overlay10 {
+        z-index: 10;
+    }
 
 
   @font-face {
