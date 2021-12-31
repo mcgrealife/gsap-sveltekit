@@ -41,11 +41,22 @@
     //   },
     // });
 
+
+    const state = Flip.getState(".text");
+      
     const tl = gsap.timeline();
 
+    function runFlip() {
+      console.log("runFlip")
+      // Flip.from(state, {
+      //   gridArea: "2/3/3/3"
+      // })
+    }
+
     tl.to(".property", { y: -1875 })
-      .to(".small-header", { opacity: "+=100", duration: 0.1 }, "<6.7%")
-      .to(".text", { left: "+=800" }, "<25%")
+      .to(".small-header", { opacity: "+=100", duration: 0.1, onComplete: runFlip }, "<6.7%")
+      // .flip(".text", {state}, {left: "+=800"})
+      .to(".text", { left: "+=60vw" }, "<25%")
       .set(".text", { text: "Public posting prohibited" }, "<30%")
       .to(".availability", { left: 0 })
       .to(".black-background", { opacity: 0.5, ease: "easeIn" })
@@ -188,7 +199,7 @@
     top: 0px;
     display: grid;
     place-content: center;
-    grid-template-columns: 400px 398px 400px;
+    grid-template-columns: 1fr 398px  1fr;
     grid-template-rows: 1fr 818.5px 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
@@ -253,6 +264,7 @@
     font-size: 72px;
     color: black;
     mix-blend-mode: lighten;
+    max-width: 400px;
   }
 
   .bg-transition {
@@ -261,6 +273,7 @@
     /* width: 100vh;
     height: 100vh; */
     background-color: #366ca5;
+    
   }
 
   .availability {
@@ -326,7 +339,10 @@
   .imac {
     position: relative;
     /* right: 100vw; */
+    top: 75px;
     grid-area:1/1/-1/-1;
+    max-width: 1200px;
+    place-self: center;
   }
 
   .black-background {
@@ -396,7 +412,7 @@
     object-fit: cover;
     height: auto;
     width: 100%;
-    grid-area: 1/1/3/5;
+    grid-area: 1/1/3/4;
   }
 
   .overlay1 {
