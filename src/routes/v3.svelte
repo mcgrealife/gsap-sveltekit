@@ -166,9 +166,7 @@
         background-color: black;
         opacity: 50%;
         height: 100%;
-        width: 100%;
-        
-        
+        width: 100%;        
     }
   
     .property {
