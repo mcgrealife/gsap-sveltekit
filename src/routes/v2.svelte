@@ -14,13 +14,14 @@
   import { onMount } from "svelte";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/dist/ScrollTrigger.js";
+  import { Flip } from "gsap/dist/Flip.js";
+  import { TextPlugin} from "gsap/dist/TextPlugin.js";
 
   gsap.registerPlugin(ScrollTrigger);
-  
+  gsap.registerPlugin(Flip);
+  gsap.registerPlugin(TextPlugin);
 
   onMount(() => {
-
-
 
     // const runOnComplete = () => {
     //   gsap.to(".availability", {
@@ -31,123 +32,94 @@
     // }
 
    
+    // gsap.to(".scroll", {
+    //   ease: "none",
+    //   // onComplete: runOnComplete,
+    //   scrollTrigger: {
+    //     // trigger: ".scroll",
+    //     // start: "middle top", 
+    //     pin: ".gridContainer",
+    //     scrub: 1,
+    //     // markers: true,
+    //   },
+    // });
+
+
+    const tl = gsap.timeline();
+
+    tl.to(".property", {y: -1875})
+      .to(".small-header", {opacity: "+=100", duration: 0.1}, "<6.7%")
+      .to(".text", {left: "+=800"}, "<25%")
+      .set(".text", {text: "Public posting prohibited"}, "<30%")
+      .to(".availability", {left: 0});
     
-    gsap.to(".property", {
-      ease: "none",
-      y: "-=1875",
-      // onComplete: runOnComplete,
-      scrollTrigger: {
-        // trigger: ".scroll",
-        // start: "middle top", 
-        pin: "#gridContainer",
-        scrub: 1,
-        // markers: true,
-      },
-    });
-
-    gsap.to(".availability", {
-      ease: "none",
-      left: "-=362",
-      scrollTrigger: {
-        trigger: ".property",
-        start: "2000px center",
-        markers: true,
-        
-        
-        toggleActions: "play reverse play reverse"
-      },
-    });
-
-
-    // try to make small-header reverse at the slightest scroll oppositie direction
-    gsap.to(".small-header", {
-      ease: "none",
-      opacity: "+=100",
-      duration: 0.1,
-      scrollTrigger: {
-        trigger: ".property",
-        // toggleActions: "play play reverse reverse",
-        start: "middle -100px",
-        // end: "10px",
-        scrub: 0,
-        // markers: true,
-      },
-    });
-
-
-    gsap.to(".text", {
-      ease: "none",
-      left: "+=450",
-      // onComplete: runOnComplete,
-      scrollTrigger: {
-        trigger: ".test-text",
-        // start: "middle top",
-        scrub: 1,
-        // markers: true,
-      },
-    });
-
+      ScrollTrigger.create({
+        animation: tl,
+        trigger: "#gridContainer",
+        start: "top top",
+        end: "+=5000",
+        scrub: 2,
+        pin: true,
+        anticipatePin: 1,
+      })
 
   });
 
 </script>
 
 
+  <div class="scroll">
 
-<div class="scroll">
-  <div class="section2"></div>
-  <div id="gridContainer"  class="gridContainer">
-
-    <div id= "text" class="text">A better way to generate leads</div>
-
-    
-
-    <div class="phone-container">
+    <div class="section1" data-speed=".4">
+      <h1 class="welcomeText">A better way to generate leads</h1>   
       
-      <img
-        class="fillColWidth property"
-        id="property"
-        src="phone-screens/property-tall.png"
-        alt="property-tall"
-      />
-      <img class="swiper fillColWidth overlay10" src="swiper.svg" alt="swiper" />
-
-      <img class="fillColWidth availability overlay4" src="availability.png" alt="availability" >
-
-
-      <img class="nav fillColWidth overlay5" src="nav.png" alt="nav">
-
-      <img class="small-header fillColWidth overlay" src="small-header.png" alt="small-header">
-
-      <img
-        class="status-bar fillColWidth overlay"
-        src="status-bar.png"
-        alt="status-bar"
-      />
-
-      <img
-        class="fitColWidth overlay10"
-        src="iPhone-Frame.svg"
-        alt="iPhone-frame"
-      />
-
-           
-      
-      
-
     </div>
-    
+
+    <div id="gridContainer"  class="gridContainer">
+  
+      <div id= "text" class="text">Syndicated data only</div>
+  
+  
+      <div class="phone-container">
+        
+        <img
+          class="fillColWidth property"
+          id="property"
+          src="phone-screens/property-tall.png"
+          alt="property-tall"
+        />
+        <img class="swiper fillColWidth overlay10" src="swiper.svg" alt="swiper" />
+  
+        <img class="fillColWidth availability overlay4" src="availability.png" alt="availability" >
+  
+  
+        <img class="nav fillColWidth overlay5" src="nav.png" alt="nav">
+  
+        <img class="small-header fillColWidth overlay" src="small-header.png" alt="small-header">
+  
+        <img
+          class="status-bar fillColWidth overlay"
+          src="status-bar.png"
+          alt="status-bar"
+        />
+  
+        <img
+          class="fitColWidth overlay10"
+          src="iPhone-Frame.svg"
+          alt="iPhone-frame"
+        />
+      </div>
+    </div>
+    <div class="section2">
+      <div class="direct-data">
+        <h1>Direct Data only. No public postings allowed.</h1>
+      </div>
+    </div>
+    <div class="section3" />
+    <div class="section4" />
+    <div class="section5" />
   </div>
 
-  <div class="section2"></div>
- 
-  
-  <div class="test-text">
-    <h1>test</h1>
-  </div>
-  
-
-</div>
 
 
 <style>
@@ -156,11 +128,12 @@
   }
 
   .gridContainer {
-    /* position: -webkit-sticky;
-    position: sticky; */
+    position: -webkit-sticky;
+    position: sticky;
     top: 0px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr) 398px repeat(2, 1fr);
+    place-content: center;
+    grid-template-columns: 400px 398px 400px;
     grid-template-rows: 1fr 818.5px 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
@@ -169,8 +142,8 @@
   }
 
   .phone-container {
-  overflow-y: hidden;
-      grid-area: 2/3/3/4;
+      overflow-y: hidden;
+      grid-area: 2/2/3/3;
       display: grid;
       grid-template-columns: 1fr 362px 1fr;
       grid-template-rows: 18px 43px 740px 18px;
@@ -181,30 +154,66 @@
   }
 
   .scroll {
-    height: 500vh;
-    overscroll-behavior-y: none;  
+    /* height: 500vh; */
+    overscroll-behavior-y: none; 
+    background-color: white; 
   }
 
+  .welcomeText {
+    color: white;
+    font-weight: 400;
+    font-size: 50px;
+  }
+
+  .section1 {
+    display: grid;
+    place-content: center;
+    height: 50vh;
+    background-color: #366CA5;
+    
+  }
   .section2 {
-    height: 1080px;
+    height: 100vh;
     background-color:#366CA5;
   }
 
+  .section3 {
+    height: 100vh;
+    background-color:red;
+  }
+
+  .section4 {
+    height: 100vh;
+    background-color:green;
+  }
+  .section5 {
+    height: 100vh;
+    background-color:pink;
+  }
 .text {
-  grid-area: 2/3/3/4;
+  opacity: 1000;
+  grid-area: 2/1/3/2;
   align-self: center;
   justify-self: center;
+  text-align: center;
   position: relative;
   font-size: 72px;
+  color: black;
+  mix-blend-mode: lighten;
+ 
 }
 
 
   
   .availability {
-    grid-area: 3/3/3/4;
+    grid-area: 3/2/4/3;
     position: relative;
-    
-    
+    height: auto;
+    right: -362px;    
+  }
+
+  .direct-data {
+    opacity:0;
   }
 
 
